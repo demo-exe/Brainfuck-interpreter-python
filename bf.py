@@ -36,7 +36,7 @@ class BrainfuckInterpreter:
         self.IP += 1
     def _in(self):
         self.IP += 1
-    def _out(self, value):
+    def _out(self):
         self.IP += 1
     def _startLoop(self):
         self.IP += 1
