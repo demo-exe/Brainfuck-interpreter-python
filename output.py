@@ -8,4 +8,4 @@ class IOutput:
 class StdinOutput(IOutput):
     """Standard console output"""
     def putNext(self, char):
-        print(char, end='')
+        print(chr(char), end='')
