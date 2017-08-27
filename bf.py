@@ -44,7 +44,11 @@ class BrainfuckInterpreter:
         self.IP += 1
 
     def run(self):
-        pass
+        nexti = self.source.getToken(self.IP)
+        while nexti != 0:
+            self.token_interpreters[nexti]()
+            nexti = self.source.getToken(self.IP)
+
 
 
 
