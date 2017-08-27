@@ -23,22 +23,25 @@ class BrainfuckInterpreter:
             ']': self._endLoop
         }
 
+        #Instruction Pointer
+        self.IP = 0
+
     def _moveRight(self):
-        pass
+        self.IP += 1
     def _moveLeft(self):
-        pass
+        self.IP += 1
     def _increase(self):
-        pass
+        self.IP += 1
     def _decrease(self):
-        pass
+        self.IP += 1
     def _in(self):
-        pass
+        self.IP += 1
     def _out(self, value):
-        pass
+        self.IP += 1
     def _startLoop(self):
-        pass
+        self.IP += 1
     def _endLoop(self):
-        pass
+        self.IP += 1
 
     def run(self):
         pass
