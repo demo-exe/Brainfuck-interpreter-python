@@ -8,6 +8,10 @@ from source import *
 class BrainfuckInterpreter:
 
     def __init__(self, source, input, output):
+        self.source = source
+        self.input = input
+        self.output = output
+
         self.token_interpreters = {
             '>': self._moveRight,
             '<': self._moveLeft,
