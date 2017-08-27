@@ -32,7 +32,7 @@ Here is a list of supported and planned features
 - [x] Full brainfuck syntax
 - [x] Nested loops
 - [ ] '#' debug command
-- [ ] Comments in source
+- [x] Comments in source
 - [ ] Command line source input
 - [ ] Program blocking user input
 - [ ] Output to file
