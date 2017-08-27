@@ -47,10 +47,41 @@ class BrainfuckInterpreter:
     def _out(self):
         self.output.putNext(self.memory.GetCell())
         self.IP += 1
+
     def _startLoop(self):
-        self.IP += 1
+        stack = 0
+        tmpIP = self.IP + 1
+        if self.memory.GetCell() == 0:
+            while True:
+                token = self.source.getToken(tmpIP)
+                if token == ']': #find matching closing bracket
+                    if stack == 0: #stack is empty - this is a matching bracket
+                        self.IP = tmpIP + 1 # jump to instruction after it
+                        break
+                    else:
+                        stack -= 1 #nested loop ended
+                elif token == '[': #found nested loop - increase stack
+                    stack += 1
+                tmpIP += 1
+        else: #cell != 0 proceed to next instruction
+            self.IP += 1
+
     def _endLoop(self):
-        self.IP += 1
+        stack = 0
+        tmpIP = self.IP - 1 #this time we do reverse search
+
+        while True:
+            token = self.source.getToken(tmpIP)
+            if token == '[': #find matching opening bracket
+                if stack == 0: #stack is empty - this is matching bracket
+                    self.IP = tmpIP # jump to it
+                    break
+                else:
+                    stack -= 1 #nested loop ended
+            elif token == ']': #found nested loop - increase stack
+                stack += 1
+            tmpIP -= 1
+
 
     def run(self):
         nexti = self.source.getToken(self.IP)
