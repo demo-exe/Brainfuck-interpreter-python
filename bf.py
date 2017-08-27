@@ -30,16 +30,22 @@ class BrainfuckInterpreter:
         self.memory = Memory()
 
     def _moveRight(self):
+        self.memory.MoveRight()
         self.IP += 1
     def _moveLeft(self):
+        self.memory.MoveLeft()
         self.IP += 1
     def _increase(self):
+        self.memory.Increase()
         self.IP += 1
     def _decrease(self):
+        self.memory.Decrease()
         self.IP += 1
     def _in(self):
+        self.memory.SetCell(self.input.getNext())
         self.IP += 1
     def _out(self):
+        self.output.putNext(self.memory.GetCell())
         self.IP += 1
     def _startLoop(self):
         self.IP += 1
