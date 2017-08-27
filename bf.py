@@ -1,7 +1,15 @@
-from memory import *
-from input import *
-from output import *
-from source import *
+from Core import memory
+from Core import input
+from Core import output
+from Core import source
+
+
+
+
+
+
+
+
 
 
 
@@ -27,7 +35,7 @@ class BrainfuckInterpreter:
         self.IP = 0
 
         #Memory representation
-        self.memory = Memory()
+        self.memory = memory.Memory()
 
     def _moveRight(self):
         self.memory.MoveRight()
@@ -94,5 +102,5 @@ class BrainfuckInterpreter:
 
 
 
-BrainfuckInterpreter(FileSource('helloworld.b'), StdinInput(), StdinOutput()).run()
+BrainfuckInterpreter(source.FileSource('helloworld.b'), input.StdinInput(), output.StdinOutput()).run()
 
