@@ -1,12 +1,10 @@
-from . import memory
-
-
 class Interpreter:
 
-    def __init__(self, source, input, output):
+    def __init__(self, source, input, output, memory):
         self.source = source
         self.input = input
         self.output = output
+        self.memory = memory
 
         self.token_interpreters = {
             '>': self._moveRight,
@@ -21,9 +19,6 @@ class Interpreter:
 
         #Instruction Pointer
         self.IP = 0
-
-        #Memory representation
-        self.memory = memory.Memory()
 
     def _moveRight(self):
         self.memory.MoveRight()

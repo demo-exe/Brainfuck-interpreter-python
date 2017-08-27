@@ -1,6 +1,4 @@
-from Core import input
-from Core import output
-from Core import source
+from Core import input, output, source, memory
 from Core import interpreter
 from Core import version
 
@@ -19,7 +17,7 @@ args = parser.parse_args()
 s = source.FileSource(args.input_file)
 i = input.StdinInput()
 o = output.StdinOutput()
+m = memory.Memory()
 
-
-interpreter.Interpreter(s, i, o).run()
+interpreter.Interpreter(s, i, o, m).run()
 
