@@ -26,6 +26,9 @@ class BrainfuckInterpreter:
         #Instruction Pointer
         self.IP = 0
 
+        #Memory representation
+        self.memory = Memory()
+
     def _moveRight(self):
         self.IP += 1
     def _moveLeft(self):
