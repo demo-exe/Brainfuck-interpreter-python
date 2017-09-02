@@ -15,9 +15,8 @@ class ISource:
 class FileSource(ISource):
     """Parse file into source tokens""" #TODO: comments deleting, file virtualisation
 
-    def __init__(self, filename):
-        with open(filename,"r") as file:
-            self.__text = file.read()
+    def __init__(self, file):
+        self.__text = file.read()
 
         self.__text = self._removeComments(self.__text)
         
