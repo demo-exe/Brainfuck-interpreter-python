@@ -1,18 +1,24 @@
 class IInput:
     """Interface for accessing input"""
+    def __init__(self):
+        self._position = 0
+        self._inputtext = ''
+
     def getNext(self):
-        pass
+        try:
+            ch = self._inputtext[self._position]
+            self._position += 1
+            return ord(ch)
+        except: #todo catch only key?exception
+            return 0
 
 class StdinInput(IInput):
     """Standard console input""" #TODO: implement program-blocking input
     def __init__(self):
-        self.__position = 0
-        self.__inputtext = input("Please specify input for a program: ")
-
-    def getNext(self):
-        try:
-            ch = self.__inputtext[self.__position]
-            self.__position += 1
-            return ord(ch)
-        except: #todo catch only key?exception
-            return 0
+        super().__init__()
+        self._inputtext = input("Please specify input for a program: ")
+    
+class StringInput(IInput):
+    def __init__(self, input_string):
+        super().__init__()
+        self._inputtext = input_string
