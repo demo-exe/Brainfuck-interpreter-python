@@ -8,13 +8,13 @@ from argparse import RawTextHelpFormatter
 
 parser = argparse.ArgumentParser(description="Commandline Brainfuck interpreter\nhttps://github.com/demozylak/Brainfuck-interpreter-python", formatter_class=argparse.RawTextHelpFormatter)
 
-parser.add_argument("input_file", type=argparse.FileType('r'), help="source file to be interpreted")
+parser.add_argument("source_file", type=argparse.FileType('r'), help="source file to be interpreted")
 parser.add_argument('--version', action='version', version='%(prog)s {version}'.format(version=version.__version__))
 
 args = parser.parse_args()
 
 
-s = source.FileSource(args.input_file)
+s = source.FileSource(args.source_file)
 i = input.StdinInput()
 o = output.StdinOutput()
 m = memory.Memory()
