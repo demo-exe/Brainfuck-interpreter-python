@@ -22,8 +22,13 @@ class StdinInput(IInput):
     def __init__(self):
         super().__init__()
         logger.debug('Constructing StdinInput')
-        self._inputtext = input("Please specify input for a program: ")
-        logger.info('Input received: %s' % self._inputtext)
+        self._inputtext = None
+
+    def getNext(self):
+        if(self._inputtext == None):
+            self._inputtext = input("Please specify input for a program: ")
+            logger.info('Input received: %s' % self._inputtext)
+        return super().getNext()
     
 class StringInput(IInput):
     def __init__(self, input_string):
