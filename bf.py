@@ -23,13 +23,21 @@ parser.add_argument('-w', '--wrap', type=int, dest='wrap', metavar='MAXINT',
                         help="Wrap memory at specified size\nWithout flag wraps at 256\nSpecify -1 for no wrapping") 
 parser.add_argument('-s', '--size', type=int, dest='size', metavar='SIZE',
                         help="Specify max memory size\nWithout argument memory is dynamic ( limited only by machine RAM )") 
+parser.add_argument("-v", "--verbosity", dest='verbosity', action="count",
+                    help="Increase logging verbosity ( add more v-s for more output )")
 
 args = parser.parse_args()
+
 
 # ** Arguments interpreting **
 
 #Logging
-log.LogSetLevel(logging.DEBUG)
+if(args.verbosity == None):
+    log.LogSetLevel(logging.CRITICAL)
+elif(args.verbosity == 1):
+    log.LogSetLevel(logging.INFO)
+else:
+    log.LogSetLevel(logging.DEBUG)
 
 #Source
 s = source.FileSource(args.file)

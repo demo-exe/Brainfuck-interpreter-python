@@ -1,6 +1,9 @@
+from .log import logger
+
 class Interpreter:
 
     def __init__(self, source, input, output, memory):
+        logger.debug("Constructing interpreter")
         self.source = source
         self.input = input
         self.output = output
@@ -47,6 +50,7 @@ class Interpreter:
                 token = self.source.getToken(tmpIP)
                 if token == ']': #find matching closing bracket
                     if stack == 0: #stack is empty - this is a matching bracket
+                        logger.info("Ending loop: jumping from %i to %i" % (self.IP, tmpIP + 1))
                         self.IP = tmpIP + 1 # jump to instruction after it
                         break
                     else:
@@ -56,6 +60,7 @@ class Interpreter:
                 tmpIP += 1
         else: #cell != 0 proceed to next instruction
             self.IP += 1
+            logger.info("Cell=%i continuing to code inside loop" % (self.memory.GetCell()))
 
     def _endLoop(self):
         stack = 0
@@ -66,6 +71,7 @@ class Interpreter:
             if token == '[': #find matching opening bracket
                 if stack == 0: #stack is empty - this is matching bracket
                     self.IP = tmpIP # jump to it
+                    logger.info("Jumping to opening bracket on: %i" % (tmpIP))
                     break
                 else:
                     stack -= 1 #nested loop ended
@@ -75,8 +81,12 @@ class Interpreter:
 
 
     def run(self):
+        logger.debug("Beginning run() IP=%i" % self.IP)
         nexti = self.source.getToken(self.IP)
         while nexti != 0:
+            logger.info("Next instruction : '%s' IP=%i" % (nexti, self.IP))
             self.token_interpreters[nexti]()
             nexti = self.source.getToken(self.IP)
+        
+        logger.info("Reached program end. IP=%i" % self.IP)
 
