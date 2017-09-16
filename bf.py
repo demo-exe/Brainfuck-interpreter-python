@@ -1,11 +1,11 @@
-from Core import input, output, source, memory
+from Core import input, output, source, memory, log
 from Core import interpreter
 from Core import version
 
-#argument parsing
+import logging
 import argparse
-from argparse import RawTextHelpFormatter
 
+#argument parsing
 parser = argparse.ArgumentParser(description="Commandline Brainfuck interpreter", 
             epilog="https://github.com/demozylak/Brainfuck-interpreter-python", 
             formatter_class=argparse.RawTextHelpFormatter)
@@ -18,7 +18,7 @@ parser.add_argument('-r', '--read-from', dest='input_file', metavar='INPUT_FILE'
                         type=argparse.FileType('r'), 
                         help="input file for brainfuck program") 
 parser.add_argument('-i', '--input', dest='input_string', metavar='INPUT',
-                        help="input string for brainfuck program") 
+                        nargs='?', const='', help="input string for brainfuck program") 
 parser.add_argument('-w', '--wrap', type=int, dest='wrap', metavar='MAXINT',
                         help="Wrap memory at specified size\nWithout flag wraps at 256\nSpecify -1 for no wrapping") 
 parser.add_argument('-s', '--size', type=int, dest='size', metavar='SIZE',
@@ -26,7 +26,11 @@ parser.add_argument('-s', '--size', type=int, dest='size', metavar='SIZE',
 
 args = parser.parse_args()
 
-#Arguments interpreting
+# ** Arguments interpreting **
+
+#Logging
+log.LogSetLevel(logging.DEBUG)
+
 #Source
 s = source.FileSource(args.file)
 
@@ -58,5 +62,7 @@ else:
     mem_size = args.size
 m = memory.Memory(size=mem_size, wrap=mem_wrap, maxint=mem_maxint)
 
+
+#Run the interpreter
 interpreter.Interpreter(s, i, o, m).run()
 
